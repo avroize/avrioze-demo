@@ -1,0 +1,9 @@
+.avroize {
+    text-align: center;
+}
+
+.avroize textarea {
+    height: 300px;
+    resize: none;
+    width: 400px;
+}
