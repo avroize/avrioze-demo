@@ -1,5 +1,7 @@
 import React from "react";
-import "../styles/Avroize.css"
+import ReactJson from 'react-json-view';
+import {getJSONAvroizer} from 'avroize-es6';
+import "../styles/Avroize.css";
 import greenCheckBox from "../images/green-checkbox.png";
 import redCheckBox from "../images/red-checkbox.png";
 
@@ -9,12 +11,27 @@ export default class Avroize extends React.Component {
     constructor() {
         super();
         this.state = {
+            avroizedJSON: null,
+            json: null,
+            schema: null,
             validJSON: null,
             validSchema: null
         };
 
+        this.handleAvroize = this.handleAvroize.bind(this);
         this.handleDataChange = this.handleDataChange.bind(this);
         this.handleSchemaChange = this.handleSchemaChange.bind(this);
+    }
+
+    handleAvroize() {
+        const parsedSchema = JSON.parse(this.state.schema);
+        const avroizer = getJSONAvroizer(parsedSchema);
+        const parsedData = JSON.parse(this.state.json);
+        const result = avroizer.avroize(parsedData);
+        console.log(result);
+        this.setState({
+            avroizedJSON: result
+        });
     }
 
     handleDataChange(event) {
@@ -22,18 +39,20 @@ export default class Avroize extends React.Component {
 
         if (data.length === 0) {
             this.setState({
+                json: null,
                 validJSON: null
             });
         } else {
             try {
-                const value = JSON.parse(data);
-                console.log(value);
+                const json = JSON.parse(data);
                 this.setState({
+                    json: data,
                     validJSON: true
                 });
 
             } catch (e) {
                 this.setState({
+                    json: null,
                     validJSON: false
                 });
             }
@@ -45,17 +64,20 @@ export default class Avroize extends React.Component {
 
         if (schema.length === 0) {
             this.setState({
+                schema: null,
                 validSchema: null
             });
         } else {
             try {
                 avsc.parse(schema);
                 this.setState({
+                    schema: schema,
                     validSchema: true
                 });
 
             } catch (e) {
                 this.setState({
+                    schema: null,
                     validSchema: false
                 });
             }
@@ -73,6 +95,16 @@ export default class Avroize extends React.Component {
             schemaImage = this.state.validSchema ? <img src={greenCheckBox} /> : <img src={redCheckBox}/>;
         }
 
+        let avroizeButton = null;
+        if (this.state.validJSON && this.state.validSchema) {
+            avroizeButton = <button id="btnAvroize" onClick={this.handleAvroize}>Avroize</button>;
+        }
+
+        let jsonViewer = null;
+        if (this.state.avroizedJSON !== null) {
+            jsonViewer = <ReactJson src={this.state.avroizedJSON} />
+        }
+
         return (
             <div className="avroize">
                 <h1 className="title">Avroize</h1>
@@ -88,6 +120,10 @@ export default class Avroize extends React.Component {
                     <textarea placeholder="<< insert data here >>" onChange={this.handleDataChange} />
                     {jsonImage}
                 </div>
+
+                {avroizeButton}
+
+                {jsonViewer}
             </div>
         );
     }

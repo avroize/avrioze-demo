@@ -3,7 +3,12 @@
 }
 
 .avroize textarea {
-    height: 300px;
+    height: 200px;
     resize: none;
-    width: 400px;
+    width: 300px;
+}
+
+#btnAvroize {
+    height: 30px;
+    width: 100px;
 }
