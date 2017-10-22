@@ -1,4 +1,3 @@
-const path = require("path");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -14,12 +13,9 @@ module.exports = {
             inject: "body"
         })
     ],
-    output: {
-         filename: '[name].bundle.js', path: path.resolve(__dirname, 'dist')
-    },
     module: {
         loaders: [
-            { test: /\.(css)$/, loader: "style-loader!css-loader" },
+            { test: /\.css$/, loader: "style-loader!css-loader" },
             { test: /\.(png|jpg)$/, loader: 'url-loader', options: { limit: 25000 } },
             { test: /\.js$/, loader: "babel-loader" },
             { test: /\.jsx$/, loader: "babel-loader" },

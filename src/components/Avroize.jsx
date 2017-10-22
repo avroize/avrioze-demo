@@ -3,8 +3,8 @@ import JSONPretty from 'react-json-pretty';
 import {getJSONAvroizer} from 'avroize-es6';
 import "react-json-pretty/JSONPretty.monikai.styl";
 import "../styles/Avroize.css";
-import greenCheckBox from "../images/green-checkbox.png";
-import redCheckBox from "../images/red-checkbox.png";
+import greenCheckBox from "../assets/green-checkbox.png";
+import redCheckBox from "../assets/red-checkbox.png";
 
 import avsc from "avsc";
 
