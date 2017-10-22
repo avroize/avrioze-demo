@@ -15,13 +15,13 @@ module.exports = {
         })
     ],
     output: {
-         filename: '[name].bundle.js', path: path.resolve(__dirname, 'dist')
+         filename: '[name].bundle.js', path: path.resolve(__dirname, 'dist'), publicPath: "/dist/"
     },
     module: {
         loaders: [
-            { test: /\.(css)$/, loader: "style-loader!css-loader" },
+            { test: /\.css$/, loader: "style-loader!css-loader" },
             { test: /\.(png|jpg)$/, loader: 'url-loader', options: { limit: 25000 } },
-            { test: /\.js$/, loader: "babel-loader" },
+            { test: /\.js$/, loader: "babel-loader", exclude: path.join(__dirname, 'node_modules') },
             { test: /\.jsx$/, loader: "babel-loader" },
             { test: /\.styl$/, loader: "style-loader!css-loader!stylus-loader"}
         ]
