@@ -1,21 +1,59 @@
-.avroize {
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.title {
     text-align: center;
 }
 
-.avroize textarea {
+.avroize {
+    width: auto;
+}
+
+.avroize {
+    width: 1200px;
+}
+
+.userInput {
     height: 200px;
     overflow-y: scroll;
     resize: none;
-    width: 300px;
+    width: 440px;
 }
 
-.avroize .imgCheckbox {
+.imgCheckbox {
     height: 20px;
     padding: 5px;
     width: 20px;
 }
 
+.divButton {
+    text-align: center;
+}
+
 #btnAvroize {
     height: 30px;
+    margin-top: 20px;
     width: 100px;
+}
+
+.innerPanel {
+    width: 600px;
+    display: block;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.panel {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#avroizeViewer {
+    height: 800px;
+    overflow-y: scroll;
+    resize: none;
+    width: 500px;
 }

@@ -1,6 +1,7 @@
 import React from "react";
-import ReactJson from 'react-json-view';
+import JSONPretty from 'react-json-pretty';
 import {getJSONAvroizer} from 'avroize-es6';
+import "react-json-pretty/JSONPretty.monikai.styl";
 import "../styles/Avroize.css";
 import greenCheckBox from "../images/green-checkbox.png";
 import redCheckBox from "../images/red-checkbox.png";
@@ -28,7 +29,6 @@ export default class Avroize extends React.Component {
         const avroizer = getJSONAvroizer(parsedSchema);
         const parsedData = JSON.parse(this.state.json);
         const result = avroizer.avroize(parsedData);
-        console.log(result);
         this.setState({
             avroizedJSON: result
         });
@@ -100,33 +100,42 @@ export default class Avroize extends React.Component {
 
         let avroizeButton = null;
         if (this.state.validJSON && this.state.validSchema) {
-            avroizeButton = <button id="btnAvroize" onClick={this.handleAvroize}>Avroize</button>;
+            avroizeButton = <button id="btnAvroize" onClick={this.handleAvroize}>Avroize!</button>;
         }
 
         let jsonViewer = null;
         if (this.state.avroizedJSON !== null) {
-            jsonViewer = <ReactJson src={this.state.avroizedJSON} />
+            jsonViewer = <JSONPretty id="json-pretty" style={{fontSize: "1.1em"}} json={this.state.avroizedJSON} space="4" />;
         }
 
         return (
             <div className="avroize">
                 <h1 className="title">Avroize</h1>
 
-                <div>
-                    <h3>Avro schema</h3>
-                    <textarea placeholder="<< insert schema here >>" onChange={this.handleSchemaChange} />
-                    {schemaImage}
+                <div className="innerPanel">
+                    <div className="panel">
+                        <h3 className="title">Avro Schema</h3>
+                        <textarea className="userInput" placeholder="<< insert schema here >>"
+                                  onChange={this.handleSchemaChange} />
+                        {schemaImage}
+
+                        <h3 className="title">Data</h3>
+                        <textarea className="userInput" placeholder="<< insert data here >>"
+                                  onChange={this.handleDataChange} />
+                        {jsonImage}
+
+                        <div className="divButton">
+                            {avroizeButton}
+                        </div>
+                    </div>
                 </div>
 
-                <div>
-                    <h3>Data</h3>
-                    <textarea placeholder="<< insert data here >>" onChange={this.handleDataChange} />
-                    {jsonImage}
+                <div className="innerPanel">
+                    <div className="panel">
+                        <h3 className="title">Avroized Data</h3>
+                        {jsonViewer}
+                    </div>
                 </div>
-
-                {avroizeButton}
-
-                {jsonViewer}
             </div>
         );
     }
