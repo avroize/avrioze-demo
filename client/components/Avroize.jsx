@@ -76,6 +76,7 @@ export default class Avroize extends React.Component {
                 });
 
             } catch (e) {
+                console.log(e);
                 this.setState({
                     schema: null,
                     validSchema: false
@@ -87,12 +88,14 @@ export default class Avroize extends React.Component {
     render() {
         let jsonImage = null;
         if (this.state.validJSON !== null) {
-            jsonImage = this.state.validJSON ? <img src={greenCheckBox} /> : <img src={redCheckBox}/>;
+            jsonImage = this.state.validJSON ? <img className="imgCheckbox" src={greenCheckBox} /> :
+                <img className="imgCheckbox" src={redCheckBox}/>;
         }
 
         let schemaImage = null;
         if (this.state.validSchema !== null) {
-            schemaImage = this.state.validSchema ? <img src={greenCheckBox} /> : <img src={redCheckBox}/>;
+            schemaImage = this.state.validSchema ? <img className="imgCheckbox" src={greenCheckBox} /> :
+                <img className="imgCheckbox" src={redCheckBox}/>;
         }
 
         let avroizeButton = null;

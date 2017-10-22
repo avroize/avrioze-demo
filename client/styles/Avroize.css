@@ -4,8 +4,15 @@
 
 .avroize textarea {
     height: 200px;
+    overflow-y: scroll;
     resize: none;
     width: 300px;
+}
+
+.avroize .imgCheckbox {
+    height: 20px;
+    padding: 5px;
+    width: 20px;
 }
 
 #btnAvroize {
